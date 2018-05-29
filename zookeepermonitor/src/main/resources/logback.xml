@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<contextName>zookeepermonitor</contextName>
+	<property resource="application.properties" />
+    <!-- 控制台输出 -->   
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern> -->
+			<pattern>#%-5level#%d{yyyy-MM-dd HH:mm:ss.SSS}#[%thread]#%C[%L]:%msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+    </appender>   
+    <!-- 按照每天生成日志文件 -->   
+    <appender name="FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">   
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${cn.sky.log.home}/%d{yyyy-MM-dd}.log</FileNamePattern>   
+            <!-- 超过120天的日志，会自动删除 -->
+            <MaxHistory>120</MaxHistory>
+        </rollingPolicy>   
+       	<encoder>
+            <!-- <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern> -->
+			<pattern>#%-5level#%d{yyyy-MM-dd HH:mm:ss.SSS}#[%thread]#%C[%L]:%msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+        <!--日志文件最大的大小-->
+       <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+         <MaxFileSize>10MB</MaxFileSize>
+       </triggeringPolicy>
+    </appender> 
+    
+    <!-- 日志输出级别 -->
+    <root level="${cn.sky.console.level}">   
+        <appender-ref ref="STDOUT" />   
+        <appender-ref ref="FILE" />   
+    </root> 
+     
+</configuration>
