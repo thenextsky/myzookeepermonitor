@@ -29,6 +29,21 @@ public class MyController {
 		logger.info("loginUI");
 		return "loginUI";
 	}
+	@RequestMapping("/listUI")
+	public String listUI() {
+		logger.info("listUI");
+		return "listUI";
+	}
+	@RequestMapping("/list")
+	public List<ZkNode> list(@RequestParam String p) {
+		try {
+			List<ZkNode> list = client.getChildren(new ZkNode(null, p, null));
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	@RequestMapping("/getall")
 	@ResponseBody
 	public List<ZkNode> getall(@RequestParam String p) {
