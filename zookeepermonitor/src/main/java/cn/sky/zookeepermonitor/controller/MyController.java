@@ -11,60 +11,59 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.sky.zookeepermonitor.bean.ZkNode;
+import cn.sky.zookeepermonitor.common.Result;
 import cn.sky.zookeepermonitor.util.MyZkClient;
 
 @Controller
-public class MyController {
+public class MyController extends BaseController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private MyZkClient client;
-	
+
 	@RequestMapping("/index")
 	public String index() {
 		logger.info("index");
 		return "index";
 	}
+
 	@RequestMapping("/loginUI")
 	public String loginUI() {
 		logger.info("loginUI");
 		return "loginUI";
 	}
+
 	@RequestMapping("/listUI")
 	public String listUI() {
 		logger.info("listUI");
 		return "listUI";
 	}
+
+	@ResponseBody
 	@RequestMapping("/list")
-	public List<ZkNode> list(@RequestParam String p) {
-		try {
-			List<ZkNode> list = client.getChildren(new ZkNode(null, p, null));
-			return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+	public Result list(@RequestParam String parentnode) throws Exception {
+		Result result = new Result();
+		List<ZkNode> list = client.getChildren(new ZkNode(null, parentnode, null));
+		result.setCode(Result.HANDLE_SUCCESS);
+		result.setData(list);
+		return result;
 	}
+
 	@RequestMapping("/getall")
 	@ResponseBody
-	public List<ZkNode> getall(@RequestParam String p) {
-		try {
-			List<ZkNode> list = client.getChildren(new ZkNode(null, p, null));
-			return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+	public Result getall(@RequestParam String parentnode) throws Exception {
+		Result result = new Result();
+		List<ZkNode> list = client.getChildren(new ZkNode(null, parentnode, null));
+		result.setCode(Result.HANDLE_SUCCESS);
+		result.setData(list);
+		return result;
 	}
-	
+
 	@RequestMapping("/create")
 	@ResponseBody
-	public String create(@RequestParam String p) {
-		try {
-			client.createNode(p);
-			return "ok";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "no";
-		}
+	public Result create(@RequestParam String parentnode) throws Exception {
+		Result result = new Result();
+		client.createNode(parentnode);
+		result.setCode(Result.HANDLE_SUCCESS);
+		return result;
 	}
 }
