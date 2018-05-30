@@ -6,9 +6,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script type='text/javascript' src='${base}/js/jquery-3.3.1.min.js'></script>
-		<script type='text/javascript' src='${base}/bootstrap-3.3.7-dist/js/bootstrap.min.js'></script>
-		<link rel='stylesheet' href='${base}/bootstrap-3.3.7-dist/css/bootstrap.min.css' type='text/css' />
+		<script type='text/javascript' src='${base}/js/all.js'></script>
 	</head>
 	<body>
 		<#include "head.ftl">
