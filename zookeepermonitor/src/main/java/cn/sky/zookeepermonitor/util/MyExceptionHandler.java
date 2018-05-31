@@ -1,4 +1,4 @@
-package cn.sky.zookeepermonitor.controller;
+package cn.sky.zookeepermonitor.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

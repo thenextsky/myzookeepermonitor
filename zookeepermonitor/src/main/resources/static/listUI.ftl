@@ -12,7 +12,7 @@
 		<#include "head.ftl">
 	
 	    <div class="container">
-	      <div class="panel panel-default">
+	    	<div class="panel panel-default">
 				<div class="panel-heading">
 					<button type="button" onclick="flush()" class="btn btn-default">刷新</button>
 				</div>

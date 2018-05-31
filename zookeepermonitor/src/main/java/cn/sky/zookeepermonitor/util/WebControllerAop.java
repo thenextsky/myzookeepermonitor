@@ -1,4 +1,4 @@
-package cn.sky.zookeepermonitor.controller;
+package cn.sky.zookeepermonitor.util;
 
 import java.lang.reflect.Method;
 
@@ -18,6 +18,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.util.WebUtils;
 
+import cn.sky.zookeepermonitor.annotation.LoginNeed;
 import cn.sky.zookeepermonitor.bean.User;
 import cn.sky.zookeepermonitor.common.Constants;
 import cn.sky.zookeepermonitor.common.Result;
