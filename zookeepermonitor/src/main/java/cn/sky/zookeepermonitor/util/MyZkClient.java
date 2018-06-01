@@ -171,7 +171,7 @@ public class MyZkClient {
      * @throws Exception
      */
     public void watchNode(String parentNode) {
-        PathChildrenCache cache = new PathChildrenCache(client, parentNode, false);
+		PathChildrenCache cache = new PathChildrenCache(client, parentNode, false);
         try {
 			cache.start();
 //			调用该方法之后，path节点会被创建，且为永久节点。
@@ -216,16 +216,16 @@ public class MyZkClient {
      * @param modes 创建模式，不传参则为CreateMode.EPHEMERAL
      * @throws Exception
      */
-    public void createNode(String nodepath,CreateMode...modes) throws Exception {
+    public void createNode(String nodepath,byte[] data,CreateMode...modes) throws Exception {
         Stat stat = client.checkExists().forPath(nodepath);
         if(stat!=null) {
-        	logger.warn(nodepath+"节点已存在");
+        	throw new RuntimeException(nodepath+"节点已存在");
         }else {
         	logger.info(nodepath+"节点不存在，现在创建");
         	if(modes.length>=1) {
-        		client.create().withMode(modes[0]).forPath(nodepath);
+        		client.create().withMode(modes[0]).forPath(nodepath,data);
         	}else {
-        		client.create().withMode(CreateMode.EPHEMERAL).forPath(nodepath);
+        		client.create().withMode(CreateMode.EPHEMERAL).forPath(nodepath,data);
         	}
         }
     }
